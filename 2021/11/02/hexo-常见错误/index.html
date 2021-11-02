@@ -4,17 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>一幢小房子</title>
+  <title>hexo 常见错误 | 一幢小房子</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="学习时的痛苦是暂时的，未学到的痛苦是终生的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一幢小房子">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="一些部署和启动hexo的常见错误及解决方法. 注意_config.yml文件的配置冒号后要加一个空格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo 常见错误">
+<meta property="og:url" content="http://example.com/2021/11/02/hexo-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/index.html">
 <meta property="og:site_name" content="一幢小房子">
-<meta property="og:description" content="学习时的痛苦是暂时的，未学到的痛苦是终生的">
+<meta property="og:description" content="一些部署和启动hexo的常见错误及解决方法. 注意_config.yml文件的配置冒号后要加一个空格">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-02T02:21:03.000Z">
+<meta property="article:modified_time" content="2021-11-02T02:53:24.466Z">
 <meta property="article:author" content="Zheng Teng">
-<meta property="article:tag" content="zt">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="一幢小房子" type="application/atom+xml">
@@ -72,9 +75,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hexo-常见错误" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-hexo-常见错误" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/11/02/hexo-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="article-date">
   <time class="dt-published" datetime="2021-11-02T02:21:03.000Z" itemprop="datePublished">2021-11-02</time>
@@ -91,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/11/02/hexo-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/">hexo 常见错误</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      hexo 常见错误
     </h1>
   
 
@@ -101,11 +102,26 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h3 id="hexo-d-输入github密码登录失败"><a href="#hexo-d-输入github密码登录失败" class="headerlink" title="hexo d 输入github密码登录失败"></a>hexo d 输入github密码登录失败</h3><p><strong>问题</strong>：在GitHub的登录框正确输入信息后，命令行那里还会继续要我们输入用户名，输入完用户名后，接下来还要输入登录密码，问题来了，我们根本不能输入密码，在按回车之后，就出现rremote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.的错误提示。。。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/11/02/hexo-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/#more">Read More</a>
-          </p>
-        
+<span id="more"></span>
+
+<p><strong>原因</strong>：</p>
+<p>1.修改为token的动机</p>
+<p>近年来，GitHub 客户受益于 GitHub.com 的许多安全增强功能，例如双因素身份验证、登录警报、经过验证的设备、防止使用泄露密码和 WebAuthn 支持。 这些功能使攻击者更难获取在多个网站上重复使用的密码并使用它来尝试访问您的 GitHub 帐户。 尽管有这些改进，但由于历史原因，未启用双因素身份验证的客户仍能够仅使用其GitHub 用户名和密码继续对 Git 和 API 操作进行身份验证。</p>
+<p>从 2021 年 8 月 13 日开始，我们将在对 Git 操作进行身份验证时不再接受帐户密码，并将要求使用基于令牌（token）的身份验证，例如个人访问令牌（针对开发人员）或 OAuth 或 GitHub 应用程序安装令牌（针对集成商） GitHub.com 上所有经过身份验证的 Git 操作。 您也可以继续在您喜欢的地方使用 SSH 密钥（如果你要使用ssh密钥可以参考）。</p>
+<p>2、修改为token的好处</p>
+<p>令牌（token）与基于密码的身份验证相比，令牌提供了许多安全优势：</p>
+<p>唯一： 令牌特定于 GitHub，可以按使用或按设备生成</p>
+<p>可撤销：可以随时单独撤销令牌，而无需更新未受影响的凭据</p>
+<p>有限 ： 令牌可以缩小范围以仅允许用例所需的访问</p>
+<p>随机：令牌不需要记住或定期输入的更简单密码可能会受到的字典类型或蛮力尝试的影响</p>
+<p><strong>解决方法</strong>：从github上获取token，修改_config.yml文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo: https://[token]@github.com/zhengteng420/zhengteng420.github.io</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="【hexo发生error：spawn-failed错误的解决方法】"><a href="#【hexo发生error：spawn-failed错误的解决方法】" class="headerlink" title="【hexo发生error：spawn failed错误的解决方法】"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/HTL2018/article/details/106876940">【hexo发生error：spawn failed错误的解决方法】</a></h3><p><strong>问题描述</strong>：<br>先是出现错误：<br>error：spawn failed…<br>然后经过一些博客的操作会出现以下问题：<br>fatal: cannot lock ref ‘HEAD’: unable to resolve reference HEAD: Invalid argument error: src refspec<br>或者：<br>error: src refspec HEAD does not match any.等等<br>总结一下：<br>问题大多是因为git进行push或者hexo d的时候改变了一些.deploy_git文件下的内容。</p>
+<p><strong>解决办法</strong>：<br>删除.deploy_git文件夹;<br>输入git config –global core.autocrlf false<br>然后，依次执行：<br>hexo clean<br>hexo g<br>hexo d<br>问题解决。暴力直接，有效。</p>
+
       
     </div>
     <footer class="article-footer">
@@ -118,62 +134,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/11/01/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-11-01T09:42:46.611Z" itemprop="datePublished">2021-11-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/11/01/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2021/11/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/11/01/hello-world/" data-id="ckvhgmh0o00007sxk6f3g7us5" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
